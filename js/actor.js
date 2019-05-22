@@ -14,9 +14,14 @@ class Actor
 
   update()
   {
-    let mouse  = createVector(mouseX,mouseY);
-    let sth =  dist(mouseX,mouseY,this.pos.x,this.pos.y) > 1 ? mouse.sub(this.pos).setMag(2) : createVector();
-    this.vel = sth;
+    // let mouse  = createVector(mouseX,mouseY);
+    // let sth = dist(mouseX,mouseY,this.pos.x,this.pos.y) > 1 ? mouse.sub(this.pos).setMag(2) : createVector();
+
+    let center = createVector(width/2,height/2);
+    let mouse = createVector(mouseX,mouseY);
+    let diff=center.sub(mouse).setMag(0.8);
+
+    this.vel = diff;
     this.vel.add(this.acc)
     this.pos.add(this.vel);
     this.acc.mult(0);
@@ -26,20 +31,20 @@ class Actor
 
   show()
   {
-    push();
-    translate(this.pos.x,this.pos.y);
-    fill(255,255,0);
-    noStroke();
-    ellipse(0,0,this.r,this.r);
-    push();
-      // translate(this.pos.x,this.pos.y);
-      fill(255,0,0);
-      let offset = createVector(cos(this.angle*.0001),sin(this.angle*.0001)).setMag(1);
-      offset.mult(this.r/2 + this.rectSize.x/2);
-      //offset =createVector();
-      rotate(this.angle);
-      rect(offset.x,offset.y,this.rectSize.x,this.rectSize.y);
-    pop();
-    pop();
+    //push();
+      translate(this.pos.x,this.pos.y);
+      fill(255,255,0);
+      noStroke();
+      ellipse(0,0,this.r,this.r);
+      push();
+        // translate(this.pos.x,this.pos.y);
+        fill(255,0,0);
+        let offset = createVector(cos(this.angle*.0001),sin(this.angle*.0001)).setMag(1);
+        offset.mult(this.r/2 + this.rectSize.x/2);
+        //offset =createVector();
+        rotate(this.angle);
+        rect(offset.x,offset.y,this.rectSize.x,this.rectSize.y);
+      pop();
+    //pop();
   }
 }

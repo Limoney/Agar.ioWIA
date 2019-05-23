@@ -22,23 +22,18 @@ function setup()
 function draw()
 {
   background(51);
-  // test();
-  // let center = createVector(width/2,height/2);
-  // let mouse = createVector(mouseX,mouseY);
-  // let diff=center.sub(mouse).setMag(0.8);
-  // camera.add(diff);
-  // translate(camera.x,camera.y);
-  //camera.add(diff);
-
+  //test();
+  let center = createVector(width/2,height/2);
+  let mouse = createVector(mouseX,mouseY);
+  let diff=center.sub(mouse).setMag(1.2);
+  camera.add(diff);
   actor.update();
-  //actor.pos = camera;
   actor.show();
-  // translate(actor.pos.x,actor.pos.y);
+  translate(camera.x,camera.y);
   for(let food of foods)
   {
     food.show();
   }
-
 }
 
 function test()

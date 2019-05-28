@@ -49,22 +49,22 @@ function draw()
 function test()
 {
   if (keyIsDown(LEFT_ARROW)) {
-    actor.pos.x -= 5;
+    // actor.pos.x -= 5;
     //camera.move(createVector(-5,0));
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    actor.pos.x += 5;
+    // actor.pos.x += 5;
     //camera.move(createVector(5,0));
   }
 
   if (keyIsDown(UP_ARROW)) {
-    actor.pos.y -= 5;
+    // actor.pos.y -= 5;
     //camera.move(createVector(0,-5));
   }
 
   if (keyIsDown(DOWN_ARROW)) {
-    actor.pos.y += 5;
+    // actor.pos.y += 5;
     //camera.move(createVector(0,5));
   }
 

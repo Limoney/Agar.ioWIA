@@ -22,8 +22,8 @@ class Camera
   {
     if(this.followTarget!=null)
     {
-      this.offset.x = this.followTarget.pos.x - width/2;
-      this.offset.y = this.followTarget.pos.y - width/2;
+      this.offset.x = this.followTarget.preOffsetPosition.x - width/2;
+      this.offset.y = this.followTarget.preOffsetPosition.y - width/2;
     }
     translate(width/2,height/2)
     scale(this.zoomValue);

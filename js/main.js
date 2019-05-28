@@ -12,7 +12,7 @@ function setup()
   boardSize = createVector(width*2,height*2);
   camera = new Camera();
   actor = new Actor(boardSize.x/2,boardSize.y/2);
-  for(let x = 0;x<10;x++)
+  for(let x = 0;x<15;x++)
   {
     for(let y = 0;y<10;y++)
     {
@@ -30,6 +30,14 @@ function draw()
   camera.update();
   actor.update();
   actor.show(camera);
+
+  stroke(255,0,0);
+  strokeWeight(10);
+  // line(-camera.offset.x,-camera.offset.y,boardSize.x,-camera.offset.y);
+  // line(-camera.offset.x,-camera.offset.y,camera.offset.x,boardSize.y);
+  // line(-boardSize.x,-camera.offset.y,camera.offset.x,boardSize.y);
+  // line(camera.offset.x,boardSize.y);
+  noStroke();
 
   for(let food of foods)
   {

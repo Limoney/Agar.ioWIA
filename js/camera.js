@@ -25,7 +25,8 @@ class Camera
       this.offset.x = this.followTarget.pos.x - width/2;
       this.offset.y = this.followTarget.pos.y - width/2;
     }
-    //scale(this.zoomValue);
+    translate(width/2,height/2)
+    scale(this.zoomValue);
     // this.offset.x += width* (this.zoomValue-1);
     // this.offset.y += height * (this.zoomValue-1);
   }

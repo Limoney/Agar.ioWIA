@@ -43,12 +43,12 @@ class Actor
     this.postOffsetPosition.y = this.preOffsetPosition.y-camera.offset.y-height/2;
     ellipse(this.postOffsetPosition.x,this.postOffsetPosition.y,this.r,this.r);
     push();
-      translate(this.postOffsetPosition.x,this.postOffsetPosition.y);
+      let offset = createVector(cos(this.angle),sin(this.angle)).setMag(1);
+      offset.mult((this.r/2 + this.rectSize.x/2)*1.2);
+      translate(this.postOffsetPosition.x+offset.x,this.postOffsetPosition.y+offset.y);
       fill(255,0,0);
-      let offset = createVector(cos(this.angle*.0001),sin(this.angle*.0001)).setMag(1);
-      offset.mult((this.r/2 + this.rectSize.x/2));
       rotate(this.angle);
-      rect(offset.x,offset.y,this.rectSize.x,this.rectSize.y);
+      rect(0,0,this.rectSize.x,this.rectSize.y);
     pop();
   }
 

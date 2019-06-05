@@ -30,6 +30,7 @@ function draw()
   camera.update();
   actor.update();
   actor.show(camera);
+  SAT.checkCollision(actor,null);
 
   stroke(255,0,0);
   strokeWeight(10);

@@ -45,7 +45,8 @@ class Actor
     push();
       let offset = createVector(cos(this.angle),sin(this.angle)).setMag(1);
       offset.mult((this.r/2 + this.rectSize.x/2)*1.2);
-      translate(this.postOffsetPosition.x+offset.x,this.postOffsetPosition.y+offset.y);
+      this.rectPos = createVector(this.postOffsetPosition.x+offset.x,this.postOffsetPosition.y+offset.y);
+      translate(this.rectPos.x,this.rectPos.y);
       fill(255,0,0);
       rotate(this.angle);
       rect(0,0,this.rectSize.x,this.rectSize.y);

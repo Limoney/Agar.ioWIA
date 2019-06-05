@@ -12,9 +12,9 @@ function setup()
   boardSize = createVector(width*2,height*2);
   camera = new Camera();
   actor = new Actor(boardSize.x/2,boardSize.y/2);
-  for(let x = 0;x<15;x++)
+  for(let x = 0;x<2;x++)
   {
-    for(let y = 0;y<10;y++)
+    for(let y = 0;y<1;y++)
     {
       foods.push(new Food(random(0,boardSize.x),random(0,boardSize.y)))
     }
@@ -30,7 +30,7 @@ function draw()
   camera.update();
   actor.update();
   actor.show(camera);
-  SAT.checkCollision(actor,null);
+  // SAT.checkCollision(actor,null);
 
   stroke(255,0,0);
   strokeWeight(10);

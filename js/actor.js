@@ -55,6 +55,7 @@ class Actor
 
   checkCollision(object)
   {
-    return dist(this.postOffsetPosition.x,this.postOffsetPosition.y,object.postOffsetPosition.x,object.postOffsetPosition.y) < this.r/2 + object.r/2
+    return SAT.checkCollision(this,object);
+    //return dist(this.postOffsetPosition.x,this.postOffsetPosition.y,object.postOffsetPosition.x,object.postOffsetPosition.y) < this.r/2 + object.r/2
   }
 }

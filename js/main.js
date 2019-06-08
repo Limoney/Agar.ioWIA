@@ -1,8 +1,9 @@
-let actor;
+let player;
 let foods = [];
 let camera;
 let boardSize;
 let tmpzoom=1;
+let score = 0;
 function setup()
 {
   rectMode(CENTER);
@@ -11,15 +12,15 @@ function setup()
   createCanvas(600,600);
   boardSize = createVector(width*2,height*2);
   camera = new Camera();
-  actor = new Actor(boardSize.x/2,boardSize.y/2);
-  for(let x = 0;x<2;x++)
+  player = new Player(boardSize.x/2,boardSize.y/2,50);
+  for(let x = 0;x<15;x++)
   {
-    for(let y = 0;y<1;y++)
+    for(let y = 0;y<15;y++)
     {
-      foods.push(new Food(random(0,boardSize.x),random(0,boardSize.y)))
+      foods.push(new Food(random(0,boardSize.x),random(0,boardSize.y),20))
     }
   }
-  camera.follow(actor);
+  camera.follow(player);
   //camera.zoom(1);
 }
 
@@ -27,10 +28,11 @@ function draw()
 {
   background(51);
   test();
+  push();
   camera.update();
-  actor.update();
-  actor.show(camera);
-  // SAT.checkCollision(actor,null);
+  player.update();
+  player.show(camera);
+  // SAT.checkCollision(player,null);
 
   stroke(255,0,0);
   strokeWeight(10);
@@ -45,27 +47,39 @@ function draw()
     food.update(camera);
     food.show(camera);
   }
+  pop();
+  showScore();
+}
+
+function showScore()
+{
+  push();
+    textSize(24);
+    fill("#78f");
+    translate(0,0);
+    text("Score: "+ score,5,20);
+  pop();
 }
 
 function test()
 {
   if (keyIsDown(LEFT_ARROW)) {
-    // actor.pos.x -= 5;
+    // player.pos.x -= 5;
     //camera.move(createVector(-5,0));
   }
 
   if (keyIsDown(RIGHT_ARROW)) {
-    // actor.pos.x += 5;
+    // player.pos.x += 5;
     //camera.move(createVector(5,0));
   }
 
   if (keyIsDown(UP_ARROW)) {
-    // actor.pos.y -= 5;
+    // player.pos.y -= 5;
     //camera.move(createVector(0,-5));
   }
 
   if (keyIsDown(DOWN_ARROW)) {
-    // actor.pos.y += 5;
+    // player.pos.y += 5;
     //camera.move(createVector(0,5));
   }
 

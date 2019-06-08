@@ -1,11 +1,8 @@
-class Food
+class Food extends Actor
 {
-  constructor(x,y)
+  constructor(x,y,radius)
   {
-    this.preOffsetPosition = createVector(x,y);
-    this.postOffsetPosition = createVector(x,y);
-    this.r = 20;
-    this.isColliding = false
+    super(x,y,radius)
   }
 
   update(camera)
@@ -17,6 +14,11 @@ class Food
   show(camera)
   {
     this.isColliding ? fill(240,180,138):fill(138,180,240);
-    ellipse(this.postOffsetPosition.x,this.postOffsetPosition.y,this.r,this.r);
+    ellipse(this.postOffsetPosition.x,this.postOffsetPosition.y,this.radius,this.radius);
+  }
+
+  reset()
+  {
+    this.preOffsetPosition = createVector(random(0,boardSize.x),random(0,boardSize.y));
   }
 }

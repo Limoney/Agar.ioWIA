@@ -1,5 +1,6 @@
 let player;
 let foods = [];
+let bots = [];
 let camera;
 let boardSize;
 let tmpzoom=1;
@@ -10,15 +11,20 @@ function setup()
   ellipseMode(CENTER);
   angleMode(DEGREES);
   createCanvas(600,600);
-  boardSize = createVector(width*2,height*2);
+  boardSize = createVector(width*3,height*3);
   camera = new Camera();
-  player = new Player(boardSize.x/2,boardSize.y/2,50);
-  for(let x = 0;x<15;x++)
+  player = new Player(boardSize.x/2,boardSize.y/2,50,"#cab");
+  for(let x = 0;x<1;x++)
   {
-    for(let y = 0;y<15;y++)
+    for(let y = 0;y<5;y++)
     {
       foods.push(new Food(random(0,boardSize.x),random(0,boardSize.y),20))
     }
+  }
+
+  for(let i =0;i<10;i++)
+  {
+    bots.push(new Bot(random(0,boardSize.x),random(0,boardSize.y),50,"#bca"))
   }
   camera.follow(player);
   //camera.zoom(1);
@@ -46,6 +52,11 @@ function draw()
   {
     food.update(camera);
     food.show(camera);
+  }
+  for(let bot of bots)
+  {
+    bot.update(camera,player);
+    bot.show(camera);
   }
   pop();
   showScore();

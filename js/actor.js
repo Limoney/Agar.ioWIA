@@ -6,11 +6,16 @@ class Actor
     this.postOffsetPosition = createVector(x,y);
     this.radius = radius;
     this.isColliding = false;
+    this.closestFood = null;
+    this.closestFoodDist = Infinity;
   }
 
   checkCollision(object)
   {
-    return dist(this.postOffsetPosition.x,this.postOffsetPosition.y,object.postOffsetPosition.x,object.postOffsetPosition.y) < this.radius/2 + object.radius/2
+    let distance = dist(this.postOffsetPosition.x,this.postOffsetPosition.y,object.postOffsetPosition.x,object.postOffsetPosition.y);
+    this.closestFoodDist = min(distance,this.closestFoodDist);
+    if(this.closestFoodDist==distance) this.closestFood = object;
+    return distance < this.radius/2 + object.radius/2
   }
 
 

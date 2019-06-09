@@ -1,6 +1,6 @@
 class Player extends Actor
 {
-  constructor(x,y,radius)
+  constructor(x,y,radius,col)
   {
     super(x,y,radius)
     this.preOffsetPosition = createVector(x,y);
@@ -11,11 +11,12 @@ class Player extends Actor
     this.growSpeed = 0.05;
     this.mass = 1;
     this.speed = 2.5;
+    this.ballColor = col;
   }
 
   update()
   {
-    this.grow();
+    if(this.grow())camera.zoom(camera.zoomValue-0.0025);
     let center = createVector(width/2,height/2);
     let mouse = createVector(mouseX,mouseY);
     let diff=mouse.sub(center).setMag(this.speed/this.mass);
@@ -25,14 +26,14 @@ class Player extends Actor
 
     for(let food of foods)
     {
-      if(this.checkCollision(food)) this.eat(food);
+      if(this.checkCollision(food)) if(this.eat(food)) camera.zoom(camera.zoomValue+0.0025);
     }
     this.rotationAngle+=5;
   }
 
   show(camera)
   {
-    fill(255,255,0);
+    fill(this.ballColor);
     noStroke();
     this.postOffsetPosition.x = this.preOffsetPosition.x-camera.offset.x-width/2;
     this.postOffsetPosition.y = this.preOffsetPosition.y-camera.offset.y-height/2;
@@ -61,12 +62,12 @@ class Player extends Actor
     if(object instanceof Food)
     {
       object.reset();
-      this.mass*=0.9;
-      this.radius*=0.98;
-      this.rectSize*=0.98;
+      this.mass*=0.85;
+      this.radius*=0.95;
+      this.rectSize*=0.95;
       if(this.radius*camera.zoomValue<1/8*width)
       {
-        camera.zoom(camera.zoomValue+0.0025);
+        return true;
       }
       score++;
     }
@@ -79,7 +80,12 @@ class Player extends Actor
     this.rectSize+=this.growSpeed/2;
     if(this.radius*camera.zoomValue>1/4*width)
     {
-      camera.zoom(camera.zoomValue-0.0025);
+      return true;
     }
+  }
+
+  checkRectCollision()
+  {
+    
   }
 }

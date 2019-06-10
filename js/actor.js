@@ -5,6 +5,7 @@ class Actor
     this.preOffsetPosition = createVector(x,y);
     this.postOffsetPosition = createVector(x,y);
     this.radius = radius;
+    this.radiusCopy = radius;
     this.isColliding = false;
     this.closestFood = null;
     this.closestFoodDist = Infinity;

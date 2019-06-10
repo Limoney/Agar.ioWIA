@@ -3,8 +3,6 @@ class Player extends Actor
   constructor(x,y,radius,col)
   {
     super(x,y,radius)
-    this.preOffsetPosition = createVector(x,y);
-    this.postOffsetPosition = createVector(x,y);
     this.rectPos = this.pos;
     this.rectSize = this.radius/3;
     this.rotationAngle=0;
@@ -16,7 +14,7 @@ class Player extends Actor
 
   update()
   {
-    if(this.grow())camera.zoom(camera.zoomValue-0.0025);
+    if(this.grow())camera.zoom(camera.zoomValue-0.015);
     let center = createVector(width/2,height/2);
     let mouse = createVector(mouseX,mouseY);
     let diff=mouse.sub(center).setMag(this.speed/this.mass);
@@ -26,9 +24,9 @@ class Player extends Actor
 
     for(let food of foods)
     {
-      if(this.checkCollision(food)) if(this.eat(food)) camera.zoom(camera.zoomValue+0.0025);
+      if(this.checkCollision(food)) if(this.eat(food)) camera.zoom(camera.zoomValue+0.015);
     }
-    this.rotationAngle+=5;
+    this.rotationAngle+=2;
   }
 
   show(camera)
@@ -44,6 +42,7 @@ class Player extends Actor
       this.rectPos = createVector(this.postOffsetPosition.x+offset.x,this.postOffsetPosition.y+offset.y);
       translate(this.rectPos.x,this.rectPos.y);
       fill(255,0,0);
+      //no time for better collision
       //rotate(this.rotationAngle);
       rect(0,0,this.rectSize,this.rectSize);
     pop();
@@ -66,7 +65,7 @@ class Player extends Actor
       this.radius*=0.95;
       this.rectSize*=0.95;
       if(!(this instanceof Bot)) score+=0.1;
-      if(this.radius*camera.zoomValue<1/8*width)
+      if(this.radius*camera.zoomValue<1/4*width)
       {
         return true;
       }
@@ -74,7 +73,8 @@ class Player extends Actor
     }
     else if(!(object instanceof Bot))
     {
-      //death
+      player.reset();
+      score = 0;
     }
     else
     {
@@ -85,7 +85,7 @@ class Player extends Actor
 
   grow()
   {
-    if(this.mass<3)this.mass+=this.growSpeed/10;
+    if(this.mass<this.speed+1)this.mass+=this.growSpeed/10;
     this.radius+=this.growSpeed;
     this.rectSize+=this.growSpeed/2;
     if(this.radius*camera.zoomValue>1/4*width)
@@ -97,15 +97,23 @@ class Player extends Actor
   rectAABB(object)
   {
     //fixme naprawić to coś
-    return (this.rectPos.x - this.rectSize > object.rectPos.x - object.rectSize ||
-           this.rectPos.x + this.rectSize < object.rectPos.x + object.rectSize);
+    return ((this.rectPos.x - this.rectSize/2 < object.rectPos.x + object.rectSize/2 &&
+             this.rectPos.x + this.rectSize/2 > object.rectPos.x - object.rectSize/2 ) &&
+            (this.rectPos.y - this.rectSize/2 < object.rectPos.y + object.rectSize/2 &&
+             this.rectPos.y + this.rectSize/2 > object.rectPos.y - object.rectSize/2))
+  }
+
+  reset()
+  {
+    this.preOffsetPosition = createVector(random(0,boardSize.x),random(0,boardSize.y));
+    this.postOffsetPosition = createVector(random(0,boardSize.x),random(0,boardSize.y));
+    this.closestFood = null;
+    this.closestFoodDist = Infinity;
+    this.acc = createVector();
+    this.vel = createVector();
+    this.rotationAngle = random(0,360);
+    this.mass = 1;
+    this.radius = this.radiusCopy;
+    this.rectSize = this.radius/3;
   }
 }
-/*
-
-return (this.rectPos.x + this.rectSize < object.rectPos.x - object.rectSize &&
-       this.rectPos.x - this.rectSize > object.rectPos.x + object.rectSize &&
-       this.rectPos.y + this.rectSize < object.rectPos.y - object.rectSize &&
-       this.rectSize.y - this.rectSize > object.rectPos.y + object.rectSize);
-
-*/

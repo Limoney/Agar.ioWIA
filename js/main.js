@@ -5,6 +5,13 @@ let camera;
 let boardSize;
 let tmpzoom=1;
 let score = 0;
+
+/*
+
+Jeśli cos jest undefined priszę odświeżyć
+
+*/
+
 function setup()
 {
   rectMode(CENTER);
@@ -22,7 +29,7 @@ function setup()
     }
   }
 
-  for(let i =0;i<5;i++)
+  for(let i =0;i<8;i++)
   {
     bots.push(new Bot(random(0,boardSize.x),random(0,boardSize.y),50,"#bca"))
   }
@@ -55,8 +62,9 @@ function draw()
   }
   for(let bot of bots)
   {
-    bot.update(camera,player);
     bot.show(camera);
+    bot.update(camera,player);
+
   }
   pop();
   showScore();
@@ -68,7 +76,7 @@ function showScore()
     textSize(24);
     fill("#78f");
     translate(0,0);
-    text("Score: "+ score.toPrecision(2),5,20);
+    text("Score: "+ score.toFixed(2),5,20);
   pop();
 }
 

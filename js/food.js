@@ -3,10 +3,13 @@ class Food extends Actor
   constructor(x,y,radius)
   {
     super(x,y,radius)
+    this.ttl = random(10,30);
+    this.lastReset = 0;
   }
 
   update(camera)
   {
+    if(millis()>this.lastReset+this.ttl*1000) this.reset();
     this.postOffsetPosition.x=this.preOffsetPosition.x-camera.offset.x;
     this.postOffsetPosition.y=this.preOffsetPosition.y-camera.offset.y;
   }
@@ -19,6 +22,8 @@ class Food extends Actor
 
   reset()
   {
+    this.lastReset=millis();
+    this.ttl = random(20,60);
     this.preOffsetPosition = createVector(random(0,boardSize.x),random(0,boardSize.y));
   }
 }

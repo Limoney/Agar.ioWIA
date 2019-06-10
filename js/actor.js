@@ -17,6 +17,4 @@ class Actor
     if(this.closestFoodDist==distance) this.closestFood = object;
     return distance < this.radius/2 + object.radius/2
   }
-
-
 }

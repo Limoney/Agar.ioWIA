@@ -1,0 +1,24 @@
+do oceny 3
+
+1. Gra typu Agar.io
+2. Ze zmianami:
+- nasz gracz ci¹gle roœnie
+- z³o¿ony jest z okrêgu i kwadratu (wzrost i jednego i drugiego)
+- trafienie w kwadrat jakiegokolwiek przeciwnika powoduje przegran¹
+- uwaga, trafienie odbywa siê ca³ym cia³em (ko³o lub kwadrat) ale gdy nasz kwadrat wejdzie w pole przeciwnika to tak¿e i my giniemy, a zatem to kwadrat trzeba trafiæ aby kologokolwiek zabiæ
+- na planszy jest kilka kulek, które ratuj¹ nam ¿ycie i nasz gracz zmniejsza siê do minimalnego rozmiaru
+- Problem, ¿e tych ratuj¹cych kulek jest niewiele, po czasie znikaj¹ i pojawiaj¹ siê nowe w innym miejscu, mo¿e byæ tak to zrobione, ¿e po np 10s wszystkie s¹ losowane na nowo
+- Im jesteœ mniejszy tym szybszy
+- Im d³u¿ej prze¿yjesz tym lepiej 
+- na wzór agara mamy tablice wyników, wynik to zabici przeciwnicy
+
+do 4
+
+- logowanie+wybór avatara, dobrane grafiki
+
+do 5 i 6
+
+- gra mo¿e byæ sieciowa z u¿yciem ajaxa, inaczej musisz symulowaæ innych graczy, lepsza ocena to z ajaxem
+
+Elementy nie spisane sam mo¿esz ustaliæ na.
+Bie¿¹ce prace co tydzieñ wysy³ane na koniec lekcji

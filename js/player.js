@@ -44,7 +44,7 @@ class Player extends Actor
       this.rectPos = createVector(this.postOffsetPosition.x+offset.x,this.postOffsetPosition.y+offset.y);
       translate(this.rectPos.x,this.rectPos.y);
       fill(255,0,0);
-      rotate(this.rotationAngle);
+      //rotate(this.rotationAngle);
       rect(0,0,this.rectSize,this.rectSize);
     pop();
   }
@@ -65,10 +65,20 @@ class Player extends Actor
       this.mass*=0.85;
       this.radius*=0.95;
       this.rectSize*=0.95;
+      if(!(this instanceof Bot)) score+=0.1;
       if(this.radius*camera.zoomValue<1/8*width)
       {
         return true;
       }
+
+    }
+    else if(!(object instanceof Bot))
+    {
+      //death
+    }
+    else
+    {
+      object.reset();
       score++;
     }
   }
@@ -84,8 +94,18 @@ class Player extends Actor
     }
   }
 
-  checkRectCollision()
+  rectAABB(object)
   {
-    
+    //fixme naprawić to coś
+    return (this.rectPos.x - this.rectSize > object.rectPos.x - object.rectSize ||
+           this.rectPos.x + this.rectSize < object.rectPos.x + object.rectSize);
   }
 }
+/*
+
+return (this.rectPos.x + this.rectSize < object.rectPos.x - object.rectSize &&
+       this.rectPos.x - this.rectSize > object.rectPos.x + object.rectSize &&
+       this.rectPos.y + this.rectSize < object.rectPos.y - object.rectSize &&
+       this.rectSize.y - this.rectSize > object.rectPos.y + object.rectSize);
+
+*/

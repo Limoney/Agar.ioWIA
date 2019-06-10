@@ -11,18 +11,18 @@ function setup()
   ellipseMode(CENTER);
   angleMode(DEGREES);
   createCanvas(600,600);
-  boardSize = createVector(width*3,height*3);
+  boardSize = createVector(width*4,height*4);
   camera = new Camera();
   player = new Player(boardSize.x/2,boardSize.y/2,50,"#cab");
-  for(let x = 0;x<1;x++)
+  for(let x = 0;x<20;x++)
   {
-    for(let y = 0;y<5;y++)
+    for(let y = 0;y<20;y++)
     {
       foods.push(new Food(random(0,boardSize.x),random(0,boardSize.y),20))
     }
   }
 
-  for(let i =0;i<10;i++)
+  for(let i =0;i<5;i++)
   {
     bots.push(new Bot(random(0,boardSize.x),random(0,boardSize.y),50,"#bca"))
   }
@@ -68,7 +68,7 @@ function showScore()
     textSize(24);
     fill("#78f");
     translate(0,0);
-    text("Score: "+ score,5,20);
+    text("Score: "+ score.toPrecision(2),5,20);
   pop();
 }
 
